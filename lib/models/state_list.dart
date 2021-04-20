@@ -1,11 +1,10 @@
-List state=[
+List stateList=[
         "andamanAndNicobarIslands",
         "andhraPradesh",
         "arunachalPradesh",
         "assam",
         "bihar",
         "chandigarh",
-        "chhattisgarh",
         'delhi',
         "dadraAndNagarHaveliAndDamanAndDiu",
         "goa",
@@ -14,18 +13,18 @@ List state=[
         "haryana",
         "jharkhand",
         "jammuAndKashmir",
-        "karnataka",
+         "karnataka",
         "kerala",
-        "ladakh",
+        "ladakh",  
         "lakshadweep",
         "maharashtra",
         "meghalaya",
-        "manipur",
-        "madhyaPradesh",
+          "manipur",
+          "madhyaPradesh",
         "mizoram",
         "nagaland",
-        "odisha",
-        "punjab",
+      "odisha",
+        "punjab", 
         "puducherry",
         "rajasthan",
         "sikkim",
@@ -33,6 +32,11 @@ List state=[
         "tamilNadu",
         "tripura",
         "uttarPradesh",
-        "uttarakhand",
+          "uttarakhand",
         "westBengal",
     ];
+                
+              
+ 
+                        
+                                

@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+
 import 'package:shimmer/shimmer.dart';
 
-class GlobalLoading extends StatelessWidget {
+class StateLoading extends StatelessWidget {
+
+  final bool inputTextLoading;
+
+  StateLoading({@required this.inputTextLoading});
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        inputTextLoading ? loadingInputCard() : Container(),
         loadingCard(),
         loadingCard(),
-        loadingCard(),
-        loadingCard(),
-        loadingLabel(),
+        loadingChartCard(),
       ],
     );
   }
@@ -54,20 +59,43 @@ class GlobalLoading extends StatelessWidget {
     );
   }
 
-  Widget loadingLabel(){
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 8),
-      child: Shimmer.fromColors(
-        baseColor: Colors.blue[300],
-        highlightColor: Colors.blue[600],
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: 200,
-              height: 16,
-              color: Colors.white,
-            ),
-          ],
+  Widget loadingInputCard(){
+    return Card(
+      elevation: 1,
+      child: Container(
+        height: 105,
+        padding: EdgeInsets.all(24),
+        child: Shimmer.fromColors(
+          baseColor: Colors.grey[300],
+          highlightColor: Colors.grey[100],
+          child: Container(
+            width: double.infinity,
+            height: 57,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget loadingChartCard(){
+    return Card(
+      elevation: 1,
+      child: Container(
+        height: 180,
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Shimmer.fromColors(
+          baseColor: Colors.grey[300],
+          highlightColor: Colors.grey[100],
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

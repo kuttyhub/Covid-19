@@ -1,18 +1,20 @@
-class Distric {
+
+
+class DistricModel {
   final String distric;
   final int active;
   final int death;
   final int confirmed;
   final int recovered;
 
-  Distric(
+  DistricModel(
       {this.distric, this.confirmed, this.death, this.recovered, this.active});
 }
-List<Distric> districFromJson(Map<String, dynamic> json) {
-    List<Distric> disList;
+List<DistricModel> districFromJson(Map<String, dynamic> json) {
+    List<DistricModel> disList=[];
     json.forEach((key, value) {
       if (key != "statecode") {
-        disList.add(Distric(
+        disList.add(DistricModel(
           distric: key,
           active: value['active'],
           confirmed: value['confirmed'] + value['delta']['confirmed'],

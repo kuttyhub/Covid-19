@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:covid19/constants.dart';
-import 'package:covid19/screens/tracker.dart';
-
-import './services/covid_service.dart';
+import './screens/tracker.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-CovidService covidService = CovidService();
+class MyApp extends StatelessWidget {
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

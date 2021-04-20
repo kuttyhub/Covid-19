@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 import '../screens/navigation_option.dart';
-import 'state.dart';
-import 'India.dart';
+import '../screens/state_screen/state.dart';
+import '../screens/india_screen/India.dart';
 
 enum NavigationStatus {
   INDIA,
@@ -16,7 +16,7 @@ class Tracker extends StatefulWidget {
 }
 
 class _TrackerState extends State<Tracker> {
-  NavigationStatus navigationStatus = NavigationStatus.INDIA;
+  NavigationStatus navigationStatus = NavigationStatus.STATE;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,12 @@ class _TrackerState extends State<Tracker> {
                       bottomRight: Radius.circular(50),
                       bottomLeft: Radius.circular(50),
                     )),
-                child: Country(),
+                child: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 250),
+                  child: navigationStatus == NavigationStatus.INDIA
+                      ? India()
+                      : StateScreen(),
+                ),
               ),
             ),
             Container(

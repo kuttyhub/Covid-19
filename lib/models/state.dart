@@ -1,22 +1,23 @@
 import 'distric_model.dart';
 
-class State {
+class StateModel {
   final String state;
-  final List<Distric> districs;
+  final List<DistricModel> districs;
 
-  State({this.state, this.districs});
+  StateModel({this.state, this.districs});
 }
 
-List<State> getStatefromJson(Map<String, dynamic> json) {
-  List<State> stateSummary;
+List<StateModel> getStatefromJson(Map<String, dynamic> json) {
+  List<StateModel> stateSummary = [];
   json.forEach((key, value) {
     if (key != 'statecode' && key != 'State Unassigned') {
       stateSummary.add(
-        State(
+        StateModel(
           state: key,
           districs: districFromJson(value['districtData']),
         ),
       );
     }
   });
+  return stateSummary;
 }
