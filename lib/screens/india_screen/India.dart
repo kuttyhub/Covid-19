@@ -32,7 +32,7 @@ class _IndiaState extends State<India> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                "Global Corona Virus Cases",
+                "India's Corona Virus Cases",
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,

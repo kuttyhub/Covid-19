@@ -16,7 +16,7 @@ class Tracker extends StatefulWidget {
 }
 
 class _TrackerState extends State<Tracker> {
-  NavigationStatus navigationStatus = NavigationStatus.STATE;
+  NavigationStatus navigationStatus = NavigationStatus.INDIA;
 
   @override
   Widget build(BuildContext context) {

@@ -2,9 +2,9 @@ import 'distric_model.dart';
 
 class StateModel {
   final String state;
-  final List<DistricModel> districs;
+  final List<DistricModel> districts;
 
-  StateModel({this.state, this.districs});
+  StateModel({this.state, this.districts});
 }
 
 List<StateModel> getStatefromJson(Map<String, dynamic> json) {
@@ -14,7 +14,7 @@ List<StateModel> getStatefromJson(Map<String, dynamic> json) {
       stateSummary.add(
         StateModel(
           state: key,
-          districs: districFromJson(value['districtData']),
+          districts: districFromJson(value['districtData']),
         ),
       );
     }

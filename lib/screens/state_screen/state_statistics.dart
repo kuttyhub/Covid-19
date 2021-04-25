@@ -19,7 +19,7 @@ class StateStatistics extends StatefulWidget {
 }
 
 class _StateStatisticsState extends State<StateStatistics> {
-  List<DistricModel> districSummaryList = [];
+  List<DistricModel> districtSummaryList = [];
   int active = 0;
   int confirmed = 0;
   int death = 0;
@@ -42,20 +42,20 @@ class _StateStatisticsState extends State<StateStatistics> {
         widget.stateName.replaceAll(' ', '').toLowerCase());
     print(stateDummy);
     if (stateDummy != null) {
-      districSummaryList = stateDummy.districs;
+      districtSummaryList = stateDummy.districts;
       var kactive = 0;
       var kconfirmed = 0;
       var kdeath = 0;
       var krecovered = 0;
 
-      for (var dis in districSummaryList) {
+      for (var dis in districtSummaryList) {
         kactive += dis.active;
         kconfirmed += dis.confirmed;
         kdeath += dis.death;
         krecovered += dis.recovered;
       }
       setState(() {
-        active = kactive;
+        active = kactive<0?0:kactive;
         confirmed = kconfirmed;
         death = kdeath;
         recovered = krecovered;
@@ -89,7 +89,7 @@ class _StateStatisticsState extends State<StateStatistics> {
         Padding(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
           child: Text(
-            "DistricWise Lists :",
+            "DistrictWise Lists :",
             style: TextStyle(
               fontSize: 14,
               color: Colors.white,
@@ -97,9 +97,8 @@ class _StateStatisticsState extends State<StateStatistics> {
             ),
           ),
         ),
-        ...List.generate(districSummaryList.length, (index) {
+        ...List.generate(districtSummaryList.length, (index) {
           return Container(
-            height: 85,
             margin: EdgeInsets.only(top: 5.0),
             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
             decoration: BoxDecoration(
@@ -111,8 +110,8 @@ class _StateStatisticsState extends State<StateStatistics> {
                 Expanded(
                   flex: 2,
                   child: Text(
-                    districSummaryList[index].distric,
-                    style: TextStyle(fontSize: 22, color: Colors.black54),
+                    districtSummaryList[index].distric,
+                    style: TextStyle(fontSize: 18, color: Colors.black54),
                   ),
                 ),
                 Flexible(
@@ -121,31 +120,32 @@ class _StateStatisticsState extends State<StateStatistics> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 25.0),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Acitve : ${districSummaryList[index].active}",
+                          "Acitve : ${districtSummaryList[index].active}",
                           style: TextStyle(
                             fontSize: 14,
                             color: kActiveColor,
                           ),
                         ),
                         Text(
-                          "Recovered : ${districSummaryList[index].recovered}",
+                          "Recovered : ${districtSummaryList[index].recovered}",
                           style: TextStyle(
                             fontSize: 14,
                             color: kRecoveredColor,
                           ),
                         ),
                         Text(
-                          "Death : ${districSummaryList[index].death}",
+                          "Death : ${districtSummaryList[index].death}",
                           style: TextStyle(
                             fontSize: 14,
                             color: kDeathColor,
                           ),
                         ),
                         Text(
-                          "Confirmed : ${districSummaryList[index].confirmed}",
+                          "Confirmed : ${districtSummaryList[index].confirmed}",
                           style: TextStyle(
                             fontSize: 14,
                             color: kConfirmedColor,
