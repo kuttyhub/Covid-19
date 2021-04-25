@@ -23,57 +23,58 @@ class _IndiaState extends State<India> {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "Global Corona Virus Cases",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                "Global Corona Virus Cases",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      summaryList = covidService.getCountrySummary();
-                    });
-                  },
-                  child: Icon(
-                    Icons.refresh,
-                    color: Colors.white,
-                  ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    summaryList = covidService.getCountrySummary();
+                  });
+                },
+                child: Icon(
+                  Icons.refresh,
+                  color: Colors.white,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          FutureBuilder(
-            future: summaryList,
-            builder: (context, snapshot) {
-              if (snapshot.hasError)
-                return Center(
-                  child: Text("Error"),
-                );
-              switch (snapshot.connectionState) {
-                case ConnectionState.waiting:
-                  return IndiaLoading(inputTextLoading: false);
-                default:
-                  return !snapshot.hasData
-                      ? Center(
-                          child: Text("Empty"),
-                        )
-                      : IndiaStatistics(
-                          summaryList: snapshot.data,
-                        );
-              }
-            },
-          ),
-        ],
+        ),
+        FutureBuilder(
+          future: summaryList,
+          builder: (context, snapshot) {
+            if (snapshot.hasError)
+              return Center(
+                child: Text("Error"),
+              );
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return IndiaLoading();
+              default:
+                return !snapshot.hasData
+                    ? Center(
+                        child: Text("Empty"),
+                      )
+                    : IndiaStatistics(
+                        summaryList: snapshot.data,
+                      );
+            }
+          },
+        ),
+      ],
     );
   }
 }

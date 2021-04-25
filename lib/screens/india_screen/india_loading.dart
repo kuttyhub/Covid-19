@@ -3,24 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class IndiaLoading extends StatelessWidget {
-
-  final bool inputTextLoading;
-
-  IndiaLoading({@required this.inputTextLoading});
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        inputTextLoading ? loadingInputCard() : Container(),
-        loadingCard(),
-        loadingCard(),
-        loadingChartCard(),
-      ],
+    return Center(
+      child: Column(
+        children: <Widget>[
+          SizedBox(height: 10),
+          loadingCard(),
+          SizedBox(height: 10),
+          loadingCard(),
+          SizedBox(height: 10),
+          loadingChartCard(),
+        ],
+      ),
     );
   }
 
-  Widget loadingCard(){
+  Widget loadingCard() {
     return Card(
       elevation: 1,
       child: Container(
@@ -59,7 +58,7 @@ class IndiaLoading extends StatelessWidget {
     );
   }
 
-  Widget loadingInputCard(){
+  Widget loadingInputCard() {
     return Card(
       elevation: 1,
       child: Container(
@@ -78,7 +77,7 @@ class IndiaLoading extends StatelessWidget {
     );
   }
 
-  Widget loadingChartCard(){
+  Widget loadingChartCard() {
     return Card(
       elevation: 1,
       child: Container(

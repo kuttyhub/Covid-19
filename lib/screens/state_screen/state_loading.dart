@@ -3,24 +3,44 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class StateLoading extends StatelessWidget {
-
-  final bool inputTextLoading;
-
-  StateLoading({@required this.inputTextLoading});
-
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        inputTextLoading ? loadingInputCard() : Container(),
+        loadingtext(),
+        SizedBox(height: 10),
+        Container(),
+        SizedBox(height: 10),
         loadingCard(),
+        SizedBox(height: 10),
         loadingCard(),
+        SizedBox(height: 10),
+        loadingtext(),
+        SizedBox(height: 10),
         loadingChartCard(),
       ],
     );
   }
 
-  Widget loadingCard(){
+  Widget loadingtext() {
+    return Card(
+      elevation: 1,
+      child: Container(
+        height: 20,
+        padding: EdgeInsets.all(10),
+        child: Shimmer.fromColors(
+          baseColor: Colors.grey[300],
+          highlightColor: Colors.grey[100],
+          child: Container(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget loadingCard() {
     return Card(
       elevation: 1,
       child: Container(
@@ -59,7 +79,7 @@ class StateLoading extends StatelessWidget {
     );
   }
 
-  Widget loadingInputCard(){
+  Widget loadingInputCard() {
     return Card(
       elevation: 1,
       child: Container(
@@ -78,22 +98,40 @@ class StateLoading extends StatelessWidget {
     );
   }
 
-  Widget loadingChartCard(){
+  Widget loadingChartCard() {
     return Card(
       elevation: 1,
       child: Container(
-        height: 180,
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        height: 240,
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         child: Shimmer.fromColors(
           baseColor: Colors.grey[300],
           highlightColor: Colors.grey[100],
           child: Column(
             children: <Widget>[
-              Expanded(
-                child: Container(
-                  color: Colors.white,
-                ),
+              Container(
+                height: 45,
+                width: double.infinity,
+                color: Colors.white,
               ),
+              SizedBox(height: 10),
+              Container(
+                height: 45,
+                width: double.infinity,
+                color: Colors.white,
+              ),
+              SizedBox(height: 10),
+              Container(
+                height: 45,
+                width: double.infinity,
+                color: Colors.white,
+              ),
+              SizedBox(height: 10),
+              Container(
+                height: 45,
+                width: double.infinity,
+                color: Colors.white,
+              )
             ],
           ),
         ),

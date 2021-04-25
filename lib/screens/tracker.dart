@@ -24,50 +24,57 @@ class _TrackerState extends State<Tracker> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Stack(
           children: [
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(32),
-                decoration: BoxDecoration(
-                    color: kPrimaryColor,
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(50),
-                      bottomLeft: Radius.circular(50),
-                    )),
-                child: AnimatedSwitcher(
-                  duration: Duration(milliseconds: 250),
-                  child: navigationStatus == NavigationStatus.INDIA
-                      ? India()
-                      : StateScreen(),
-                ),
+            Container(
+              padding: EdgeInsets.all(32),
+              decoration: BoxDecoration(
+                color: kPrimaryColor,
+              ),
+              child: AnimatedSwitcher(
+                duration: Duration(milliseconds: 250),
+                child: navigationStatus == NavigationStatus.INDIA
+                    ? India()
+                    : StateScreen(),
               ),
             ),
-            Container(
-              height: size.height * 0.1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  NavigationOption(
-                    title: "India",
-                    selected: navigationStatus == NavigationStatus.INDIA,
-                    onSelected: () {
-                      setState(() {
-                        navigationStatus = NavigationStatus.INDIA;
-                      });
-                    },
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: size.height * 0.08,
+                //width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(50),
+                    topRight: Radius.circular(50),
                   ),
-                  NavigationOption(
-                    title: "State",
-                    selected: navigationStatus == NavigationStatus.STATE,
-                    onSelected: () {
-                      setState(() {
-                        navigationStatus = NavigationStatus.STATE;
-                      });
-                    },
-                  )
-                ],
+                  color: Colors.white,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    NavigationOption(
+                      title: "India",
+                      selected: navigationStatus == NavigationStatus.INDIA,
+                      onSelected: () {
+                        setState(() {
+                          navigationStatus = NavigationStatus.INDIA;
+                        });
+                      },
+                    ),
+                    NavigationOption(
+                      title: "State",
+                      selected: navigationStatus == NavigationStatus.STATE,
+                      onSelected: () {
+                        setState(() {
+                          navigationStatus = NavigationStatus.STATE;
+                        });
+                      },
+                    )
+                  ],
+                ),
               ),
             ),
           ],

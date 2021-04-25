@@ -15,50 +15,44 @@ class IndiaStatistics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Column(
-        children: [
-          Spacer(
-            flex: 3,
-          ),
-          BuildCard(
-            "CONFIRMED",
-            summaryList[summaryList.length - 1].confirmed,
-            kConfirmedColor,
-            "ACTIVE",
-            summaryList[summaryList.length - 1].active,
-            kActiveColor,
-          ),
-          Spacer(),
-          BuildCard(
-            "RECOVERED",
-            summaryList[summaryList.length - 1].recovered,
-            kRecoveredColor,
-            "DEATH",
-            summaryList[summaryList.length - 1].death,
-            kDeathColor,
-          ),
-          Spacer(),
-          buildCardChart(summaryList),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-            child: Text(
-              "Statistics updated " +
-                  timeago.format(summaryList[summaryList.length - 1].date),
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        BuildCard(
+          "CONFIRMED",
+          summaryList[summaryList.length - 1].confirmed,
+          kConfirmedColor,
+          "ACTIVE",
+          summaryList[summaryList.length - 1].active,
+          kActiveColor,
+        ),
+        SizedBox(height: 15),
+        BuildCard(
+          "RECOVERED",
+          summaryList[summaryList.length - 1].recovered,
+          kRecoveredColor,
+          "DEATH",
+          summaryList[summaryList.length - 1].death,
+          kDeathColor,
+        ),
+        SizedBox(height: 15),
+        buildCardChart(summaryList),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+          child: Text(
+            "Statistics updated " +
+                timeago.format(summaryList[summaryList.length - 1].date),
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
             ),
           ),
-          Spacer(flex: 3),
-        ],
-      ),
+        ),
+      ],
     );
   }
-
-  
 
   Widget buildCardChart(List<CountrySummaryModel> summaryList) {
     return Card(
