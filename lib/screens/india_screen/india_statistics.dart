@@ -106,7 +106,7 @@ class IndiaStatistics extends StatelessWidget {
       ),
       new charts.Series<TimeSeriesCases, DateTime>(
         id: 'Death',
-        colorFn: (_, __) => charts.ColorUtil.fromDartColor(kDeathColor),
+        colorFn: (_, __) => charts.ColorUtil.fromDartColor(Colors.amber),
         domainFn: (TimeSeriesCases cases, _) => cases.time,
         measureFn: (TimeSeriesCases cases, _) => cases.cases,
         data: deathData,

@@ -23,6 +23,7 @@ class _TrackerState extends State<Tracker> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Stack(
           children: [
@@ -38,12 +39,13 @@ class _TrackerState extends State<Tracker> {
                     : StateScreen(),
               ),
             ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
+            Align(
+              alignment: Alignment.bottomCenter,
               child: Container(
-                height: size.height * 0.08,
+                constraints: BoxConstraints(
+                  maxHeight: size.height * 0.25,
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 20),
                 //width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
