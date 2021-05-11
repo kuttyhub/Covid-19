@@ -22,6 +22,7 @@ class _IndiaState extends State<India> {
     summaryList = covidService.getCountrySummary();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,7 +50,7 @@ class _IndiaState extends State<India> {
                 },
                 child: Icon(
                   Icons.refresh,
-                  color: Colors.white,
+                  color: Colors.green,
                 ),
               ),
             ],
@@ -61,7 +62,10 @@ class _IndiaState extends State<India> {
           builder: (context, snapshot) {
             if (snapshot.hasError)
               return Center(
-                child: Text("Error"),
+                child: Text(
+                  snapshot.error.toString().contains('SocketException')?"Please check your network":'Internal Error',
+                  style: TextStyle(fontSize:18,color:Colors.black,),
+                ),
               );
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:

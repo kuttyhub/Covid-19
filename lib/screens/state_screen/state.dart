@@ -27,7 +27,7 @@ class _StatesState extends State<StateScreen> {
   int totalDeath = 0;
   int totalRecovered = 0;
   String distName = 'none';
-  String currentState;
+  String currentState="tamil Nadu";
 
   @override
   void initState() {
@@ -63,7 +63,8 @@ class _StatesState extends State<StateScreen> {
 
     print('->>${first.adminArea}');
     currentState = first.adminArea;
-    this._typeAheadController.text = currentState ?? "tamil Nadu";
+    print("-->$currentState");
+    this._typeAheadController.text = currentState ;
     distName = first.subAdminArea ?? 'none';
   }
 
@@ -79,6 +80,8 @@ class _StatesState extends State<StateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("TypeAched "+_typeAheadController.text);
+    _typeAheadController.text=_typeAheadController.text==''?currentState:_typeAheadController.text;
     return FutureBuilder(
       future: states,
       builder: (context, snapshot) {
@@ -92,7 +95,8 @@ class _StatesState extends State<StateScreen> {
           default:
             return !snapshot.hasData
                 ? Center(
-                    child: Text("Empty"),
+                    child: Text(snapshot.error.toString().contains('SocketException')?"Please check your network":'Internal Error',
+                      style: TextStyle(fontSize:18,color:Colors.black,),),
                   )
                 : Stack(
                     children: [
@@ -105,7 +109,7 @@ class _StatesState extends State<StateScreen> {
                               padding: EdgeInsets.only(
                                   top: 30, bottom: 10, left: 10, right: 10),
                               child: Text(
-                                "Type the country name",
+                                "Type the State name",
                                 style: TextStyle(
                                   color: kTitleColor,
                                   fontWeight: FontWeight.bold,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:timeago/timeago.dart' as timeago;
 
 import '../build_card.dart';
 import '../chart.dart';

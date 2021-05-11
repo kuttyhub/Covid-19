@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:covid19/models/state.dart';
+import '../models/state.dart';
 import '../models/country_summary.dart';
 
 class CovidService {
