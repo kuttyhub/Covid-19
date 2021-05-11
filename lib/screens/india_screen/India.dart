@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../constants.dart';
 import '../../services/covid_service.dart';
 import '../../models/country_summary.dart';
 import './india_loading.dart';
@@ -24,8 +25,9 @@ class _IndiaState extends State<India> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
+        Spacer(),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
           child: Row(
@@ -34,7 +36,7 @@ class _IndiaState extends State<India> {
               Text(
                 "India's Corona Virus Cases",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: kTitleColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
@@ -53,6 +55,7 @@ class _IndiaState extends State<India> {
             ],
           ),
         ),
+        Spacer(),
         FutureBuilder(
           future: summaryList,
           builder: (context, snapshot) {
@@ -74,6 +77,7 @@ class _IndiaState extends State<India> {
             }
           },
         ),
+        Spacer(flex:2),
       ],
     );
   }

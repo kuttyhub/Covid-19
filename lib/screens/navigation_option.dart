@@ -13,7 +13,8 @@ class NavigationOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      radius: 30,
       onTap: () {
         onSelected();
       },
@@ -24,7 +25,7 @@ class NavigationOption extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              color: selected ? kPrimaryColor : Colors.grey[400],
+              color: selected ? kActiveColor : Colors.grey[400],
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -39,7 +40,7 @@ class NavigationOption extends StatelessWidget {
                       width: 8,
                       height: 8,
                       decoration: BoxDecoration(
-                        color: kPrimaryColor,
+                        color: kActiveColor,
                         shape: BoxShape.circle,
                       ),
                     ),

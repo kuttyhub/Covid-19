@@ -16,7 +16,7 @@ class IndiaStatistics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      //crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         BuildCard(
@@ -37,34 +37,55 @@ class IndiaStatistics extends StatelessWidget {
           kDeathColor,
         ),
         SizedBox(height: 15),
-        buildCardChart(summaryList),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-          child: Text(
-            "Statistics updated " +
-                timeago.format(summaryList[summaryList.length - 1].date),
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
-        ),
+        buildCardChart(summaryList, context),
       ],
     );
   }
 
-  Widget buildCardChart(List<CountrySummaryModel> summaryList) {
-    return Card(
-      elevation: 1,
+  Widget buildCardChart(
+      List<CountrySummaryModel> summaryList, BuildContext context) {
+    return Flexible(
       child: Container(
-        height: 190,
+        height: MediaQuery.of(context).size.height * 0.35,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Chart(
-          _createData(summaryList),
-          animate: false,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              child: Chart(
+                _createData(summaryList),
+                animate: false,
+              ),
+            ),
+            SizedBox(height: 10),
+            buildinfo(kActiveColor, "Active Cases"),
+            SizedBox(height: 5),
+            buildinfo(kConfirmedColor, "Confirmed Cases"),
+            SizedBox(height: 5),
+            buildinfo(kRecoveredColor, "Recovered Cases"),
+            SizedBox(height: 5),
+            buildinfo(Colors.amber, "Death Cases"),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget buildinfo(Color color, String text) {
+    return Row(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: color,
+          ),
+          height: 10,
+          width: 10,
+        ),
+        SizedBox(width: 5),
+        Text(text, style: TextStyle(color: Colors.grey)),
+      ],
     );
   }
 

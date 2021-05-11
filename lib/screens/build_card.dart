@@ -22,7 +22,7 @@ class BuildCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 1,
+      elevation: 0,
       child: Container(
         height: 100,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),

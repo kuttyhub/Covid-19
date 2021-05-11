@@ -25,7 +25,7 @@ class StateLoading extends StatelessWidget {
 
   Widget loadingtext() {
     return Card(
-      elevation: 1,
+      elevation: 0,
       child: Container(
         height: 20,
         padding: EdgeInsets.all(10),
@@ -42,7 +42,7 @@ class StateLoading extends StatelessWidget {
 
   Widget loadingCard() {
     return Card(
-      elevation: 1,
+      elevation: 0,
       child: Container(
         height: 100,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -81,7 +81,7 @@ class StateLoading extends StatelessWidget {
 
   Widget loadingInputCard() {
     return Card(
-      elevation: 1,
+      elevation: 0,
       child: Container(
         height: 105,
         padding: EdgeInsets.all(24),
@@ -100,7 +100,7 @@ class StateLoading extends StatelessWidget {
 
   Widget loadingChartCard() {
     return Card(
-      elevation: 1,
+      elevation: 0,
       child: Container(
         height: 240,
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),

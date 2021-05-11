@@ -28,7 +28,7 @@ class _TrackerState extends State<Tracker> {
         child: Stack(
           children: [
             Container(
-              padding: EdgeInsets.all(32),
+              padding: EdgeInsets.only(bottom:30,top:0,left:20,right:20),
               decoration: BoxDecoration(
                 color: kPrimaryColor,
               ),
@@ -45,8 +45,8 @@ class _TrackerState extends State<Tracker> {
                 constraints: BoxConstraints(
                   maxHeight: size.height * 0.25,
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                //width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50),

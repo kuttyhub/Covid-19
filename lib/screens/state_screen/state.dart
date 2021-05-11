@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:location/location.dart';
 
 import '../../constants.dart';
 import './state_statistics.dart';
@@ -23,12 +26,45 @@ class _StatesState extends State<StateScreen> {
   int totalConfirmed = 0;
   int totalDeath = 0;
   int totalRecovered = 0;
+  String distName = 'none';
+  String currentState;
+
   @override
   void initState() {
     super.initState();
     states = covidService.getStateSummary();
+    getUserLocation();
     print(states);
-    this._typeAheadController.text = "tamil Nadu";
+  }
+
+  getUserLocation() async {
+    //call this async method from whereever you need
+    LocationData myLocation;
+    String error;
+    Location location = new Location();
+    try {
+      myLocation = await location.getLocation();
+    } on PlatformException catch (e) {
+      if (e.code == 'PERMISSION_DENIED') {
+        error = 'please grant permission';
+        print(error);
+      }
+      if (e.code == 'PERMISSION_DENIED_NEVER_ASK') {
+        error = 'permission denied- please enable it from app settings';
+        print(error);
+      }
+      myLocation = null;
+    }
+    final coordinates =
+        new Coordinates(myLocation.latitude, myLocation.longitude);
+    var addresses =
+        await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    var first = addresses.first;
+
+    print('->>${first.adminArea}');
+    currentState = first.adminArea;
+    this._typeAheadController.text = currentState ?? "tamil Nadu";
+    distName = first.subAdminArea ?? 'none';
   }
 
   List<String> _getSuggestions(List<StateModel> list, String query) {
@@ -66,14 +102,14 @@ class _StatesState extends State<StateScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
+                              padding: EdgeInsets.only(
+                                  top: 30, bottom: 10, left: 10, right: 10),
                               child: Text(
                                 "Type the country name",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: kTitleColor,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                 ),
                               ),
                             ),
@@ -98,7 +134,7 @@ class _StatesState extends State<StateScreen> {
                                         left: 24.0, right: 16.0),
                                     child: Icon(
                                       Icons.search,
-                                      color: Colors.black,
+                                      color: Colors.grey,
                                       size: 28,
                                     ),
                                   ),
@@ -128,6 +164,8 @@ class _StatesState extends State<StateScreen> {
                             StateStatistics(
                               stateSummary: snapshot.data,
                               stateName: _typeAheadController.text,
+                              currentStateName: currentState,
+                              currentDistName: distName,
                             ),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.06,

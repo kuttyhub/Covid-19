@@ -21,7 +21,7 @@ class IndiaLoading extends StatelessWidget {
 
   Widget loadingCard() {
     return Card(
-      elevation: 1,
+      elevation: 0,
       child: Container(
         height: 100,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -60,7 +60,7 @@ class IndiaLoading extends StatelessWidget {
 
   Widget loadingInputCard() {
     return Card(
-      elevation: 1,
+      elevation: 0,
       child: Container(
         height: 105,
         padding: EdgeInsets.all(24),
@@ -79,7 +79,7 @@ class IndiaLoading extends StatelessWidget {
 
   Widget loadingChartCard() {
     return Card(
-      elevation: 1,
+      elevation: 0,
       child: Container(
         height: 180,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
