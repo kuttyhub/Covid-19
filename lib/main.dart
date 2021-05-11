@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import './screens/tracker.dart';
 
-void main() {
+Future<InitializationStatus> _initGoogleMobileAds() {
+  return MobileAds.instance.initialize();
+}
+
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await _initGoogleMobileAds();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {runApp(MyApp());} );
 
 }

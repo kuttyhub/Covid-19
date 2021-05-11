@@ -27,7 +27,7 @@ class _StatesState extends State<StateScreen> {
   int totalDeath = 0;
   int totalRecovered = 0;
   String distName = 'none';
-  String currentState="tamil Nadu";
+  String currentState = "tamil Nadu";
 
   @override
   void initState() {
@@ -64,7 +64,7 @@ class _StatesState extends State<StateScreen> {
     print('->>${first.adminArea}');
     currentState = first.adminArea;
     print("-->$currentState");
-    this._typeAheadController.text = currentState ;
+    this._typeAheadController.text = currentState;
     distName = first.subAdminArea ?? 'none';
   }
 
@@ -80,8 +80,10 @@ class _StatesState extends State<StateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("TypeAched "+_typeAheadController.text);
-    _typeAheadController.text=_typeAheadController.text==''?currentState:_typeAheadController.text;
+    print("TypeAched " + _typeAheadController.text);
+    _typeAheadController.text = _typeAheadController.text == ''
+        ? currentState
+        : _typeAheadController.text;
     return FutureBuilder(
       future: states,
       builder: (context, snapshot) {
@@ -95,90 +97,91 @@ class _StatesState extends State<StateScreen> {
           default:
             return !snapshot.hasData
                 ? Center(
-                    child: Text(snapshot.error.toString().contains('SocketException')?"Please check your network":'Internal Error',
-                      style: TextStyle(fontSize:18,color:Colors.black,),),
-                  )
-                : Stack(
-                    children: [
-                      Container(color: kPrimaryColor),
-                      SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: 30, bottom: 10, left: 10, right: 10),
-                              child: Text(
-                                "Type the State name",
-                                style: TextStyle(
-                                  color: kTitleColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                            TypeAheadFormField(
-                              textFieldConfiguration: TextFieldConfiguration(
-                                controller: this._typeAheadController,
-                                decoration: InputDecoration(
-                                  hintText: 'Type here State name',
-                                  hintStyle: TextStyle(fontSize: 16),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide: BorderSide(
-                                      width: 0,
-                                      style: BorderStyle.none,
-                                    ),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.grey[200],
-                                  contentPadding: EdgeInsets.all(20),
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 24.0, right: 16.0),
-                                    child: Icon(
-                                      Icons.search,
-                                      color: Colors.grey,
-                                      size: 28,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              suggestionsCallback: (pattern) {
-                                return _getSuggestions(snapshot.data, pattern);
-                              },
-                              itemBuilder: (context, suggestion) {
-                                return ListTile(
-                                  title: Text(suggestion),
-                                );
-                              },
-                              transitionBuilder:
-                                  (context, suggestionsBox, controller) {
-                                return suggestionsBox;
-                              },
-                              onSuggestionSelected: (suggestion) {
-                                setState(() {
-                                  this._typeAheadController.text = suggestion;
-                                });
-                              },
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            StateStatistics(
-                              stateSummary: snapshot.data,
-                              stateName: _typeAheadController.text,
-                              currentStateName: currentState,
-                              currentDistName: distName,
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.06,
-                            ),
-                          ],
-                        ),
+                    child: Text(
+                      snapshot.error.toString().contains('SocketException')
+                          ? "Please check your network"
+                          : 'Internal Error',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
                       ),
-                    ],
-                  );
+                    ),
+                  )
+                : SingleChildScrollView(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: 30, bottom: 10, left: 10, right: 10),
+                          child: Text(
+                            "Type the State name",
+                            style: TextStyle(
+                              color: kTitleColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        TypeAheadFormField(
+                          textFieldConfiguration: TextFieldConfiguration(
+                            controller: this._typeAheadController,
+                            decoration: InputDecoration(
+                              hintText: 'Type here State name',
+                              hintStyle: TextStyle(fontSize: 16),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                ),
+                              ),
+                              filled: true,
+                              fillColor: Colors.grey[200],
+                              contentPadding: EdgeInsets.all(20),
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.only(left: 24.0, right: 16.0),
+                                child: Icon(
+                                  Icons.search,
+                                  color: Colors.grey,
+                                  size: 28,
+                                ),
+                              ),
+                            ),
+                          ),
+                          suggestionsCallback: (pattern) {
+                            return _getSuggestions(snapshot.data, pattern);
+                          },
+                          itemBuilder: (context, suggestion) {
+                            return ListTile(
+                              title: Text(suggestion),
+                            );
+                          },
+                          transitionBuilder:
+                              (context, suggestionsBox, controller) {
+                            return suggestionsBox;
+                          },
+                          onSuggestionSelected: (suggestion) {
+                            setState(() {
+                              this._typeAheadController.text = suggestion;
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        StateStatistics(
+                          stateSummary: snapshot.data,
+                          stateName: _typeAheadController.text,
+                          currentStateName: currentState,
+                          currentDistName: distName,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.09,
+                        ),
+                      ],
+                    ),
+                );
         }
       },
     );
