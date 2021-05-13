@@ -11,6 +11,8 @@ Future<InitializationStatus> _initGoogleMobileAds() {
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await _initGoogleMobileAds();
+  // await MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
+  //     testDeviceIds: <String>["91A3FA3C3AD300A15606BECD9819E691"],));
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {runApp(MyApp());} );
 
 }
