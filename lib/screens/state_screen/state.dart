@@ -1,7 +1,9 @@
+import 'dart:developer';
+
+import 'package:covid_hunt/utils/getAddress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:geocoder/geocoder.dart';
 import 'package:location/location.dart';
 
 import '../../constants.dart';
@@ -27,7 +29,7 @@ class _StatesState extends State<StateScreen> {
   int totalDeath = 0;
   int totalRecovered = 0;
   String distName = 'none';
-  String currentState="tamil Nadu";
+  String currentState = "tamil Nadu";
 
   @override
   void initState() {
@@ -55,17 +57,17 @@ class _StatesState extends State<StateScreen> {
       }
       myLocation = null;
     }
-    final coordinates =
-        new Coordinates(myLocation.latitude, myLocation.longitude);
-    var addresses =
-        await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    var addresses = await getAddressFromCordinates(
+        latitude: myLocation.latitude, longitude: myLocation.longitude);
     var first = addresses.first;
-
-    print('->>${first.adminArea}');
-    currentState = first.adminArea;
-    print("-->$currentState");
-    this._typeAheadController.text = currentState ;
-    distName = first.subAdminArea ?? 'none';
+    log(first.toString());
+    log('->>${first.administrativeArea}');
+    log("-->${first.subAdministrativeArea}");
+    setState(() {
+      currentState = first.administrativeArea;
+      distName = first.subAdministrativeArea;
+      this._typeAheadController.text = currentState;
+    });
   }
 
   List<String> _getSuggestions(List<StateModel> list, String query) {
@@ -80,8 +82,10 @@ class _StatesState extends State<StateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("TypeAched "+_typeAheadController.text);
-    _typeAheadController.text=_typeAheadController.text==''?currentState:_typeAheadController.text;
+    print("TypeAched " + _typeAheadController.text);
+    _typeAheadController.text = _typeAheadController.text == ''
+        ? currentState
+        : _typeAheadController.text;
     return FutureBuilder(
       future: states,
       builder: (context, snapshot) {
@@ -95,8 +99,15 @@ class _StatesState extends State<StateScreen> {
           default:
             return !snapshot.hasData
                 ? Center(
-                    child: Text(snapshot.error.toString().contains('SocketException')?"Please check your network":'Internal Error',
-                      style: TextStyle(fontSize:18,color:Colors.black,),),
+                    child: Text(
+                      snapshot.error.toString().contains('SocketException')
+                          ? "Please check your network"
+                          : 'Internal Error',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                      ),
+                    ),
                   )
                 : Stack(
                     children: [
