@@ -29,17 +29,16 @@ class _StateStatisticsState extends State<StateStatistics> {
   int confirmed = 0;
   int death = 0;
   int recovered = 0;
-  
 
   @override
   void initState() {
     //countData();
-    
+
     super.initState();
   }
 
   void countData() {
-    print(" ${widget.stateName}");
+    // print(" ${widget.stateName}");
     // for (var s in widget.stateSummary) {
     //   print(s.state.toLowerCase());
     //   print(s.state.toLowerCase() == widget.stateName.toLowerCase());
@@ -47,7 +46,7 @@ class _StateStatisticsState extends State<StateStatistics> {
     final stateDummy = widget.stateSummary.firstWhere((stateElement) =>
         stateElement.state.replaceAll(' ', '').toLowerCase() ==
         widget.stateName.replaceAll(' ', '').toLowerCase());
-    print(stateDummy);
+    // print(stateDummy);
     if (stateDummy != null) {
       districtSummaryList = stateDummy.districts;
       var kactive = 0;
@@ -71,10 +70,12 @@ class _StateStatisticsState extends State<StateStatistics> {
       });
     }
   }
+
   filterList() {
-    print('-->${widget.currentDistName} ${widget.currentStateName}<--');
+    // print('-->${widget.currentDistName} ${widget.currentStateName}<--');
     if (widget.currentDistName != 'none' &&
-        widget.currentStateName.toLowerCase() == widget.stateName.toLowerCase()) {
+        widget.currentStateName.toLowerCase() ==
+            widget.stateName.toLowerCase()) {
       final index = districtSummaryList.indexWhere((element) =>
           element.distric.replaceAll(' ', '').toLowerCase() ==
           widget.currentDistName.replaceAll(' ', '').toLowerCase());
@@ -91,9 +92,6 @@ class _StateStatisticsState extends State<StateStatistics> {
           for (int i = 0; i < index; i++) {
             filterdList.add(districtSummaryList[i]);
           }
-        }
-        for (int i = 0; i < filterdList.length; i++) {
-          //print('-->$i ${filterdList[i].distric}');
         }
       }
     } else {
@@ -157,41 +155,65 @@ Widget buildDistCard(DistricModel dis) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-                dis.distric,
-                style: TextStyle(fontSize: 18, color: Colors.grey.shade800,fontWeight: FontWeight.bold),
-              ),
+              dis.distric,
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.grey.shade800,
+                  fontWeight: FontWeight.bold),
+            ),
             Column(
-                  children: [
-                    Text("Confirmed",style: TextStyle(color:kConfirmedColor)),
-                    SizedBox(height: 3),
-                    Text(dis.confirmed.toString(),style: TextStyle(color:kConfirmedColor)),
-                  ],
-                ),
+              children: [
+                Text("Confirmed", style: TextStyle(color: kConfirmedColor)),
+                SizedBox(height: 3),
+                Text(dis.confirmed.toString(),
+                    style: TextStyle(color: kConfirmedColor)),
+              ],
+            ),
           ],
         ),
         Divider(),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal:8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Column(
+            children: [
+              Column(
                 children: [
-                  Text("Recoverd",style: TextStyle(color:kRecoveredColor),),
+                  Text(
+                    "Recoverd",
+                    style: TextStyle(color: kRecoveredColor),
+                  ),
                   SizedBox(height: 3),
-                  Text(dis.recovered.toString(),style: TextStyle(color:kRecoveredColor),),
+                  Text(
+                    dis.recovered.toString(),
+                    style: TextStyle(color: kRecoveredColor),
+                  ),
                 ],
               ),
               Column(
                 children: [
-                  Text("Active",style: TextStyle(color:kActiveColor),),
+                  Text(
+                    "Active",
+                    style: TextStyle(color: kActiveColor),
+                  ),
                   SizedBox(height: 3),
-                  Text(dis.active.toString(),style: TextStyle(color:kActiveColor),),
+                  Text(
+                    dis.active.toString(),
+                    style: TextStyle(color: kActiveColor),
+                  ),
                 ],
-              ),Column(
+              ),
+              Column(
                 children: [
-                  Text("Death",style: TextStyle(color:kDeathColor),),
+                  Text(
+                    "Death",
+                    style: TextStyle(color: kDeathColor),
+                  ),
                   SizedBox(height: 3),
-                  Text(dis.death.toString(),style: TextStyle(color:kDeathColor),),
+                  Text(
+                    dis.death.toString(),
+                    style: TextStyle(color: kDeathColor),
+                  ),
                 ],
               ),
             ],

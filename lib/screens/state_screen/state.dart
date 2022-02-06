@@ -36,7 +36,7 @@ class _StatesState extends State<StateScreen> {
     super.initState();
     states = covidService.getStateSummary();
     getUserLocation();
-    print(states);
+    // log(states.toString());
   }
 
   getUserLocation() async {
@@ -60,9 +60,9 @@ class _StatesState extends State<StateScreen> {
     var addresses = await getAddressFromCordinates(
         latitude: myLocation.latitude, longitude: myLocation.longitude);
     var first = addresses.first;
-    log(first.toString());
-    log('->>${first.administrativeArea}');
-    log("-->${first.subAdministrativeArea}");
+    // log(first.toString());
+    // log('->>${first.administrativeArea}');
+    // log("-->${first.subAdministrativeArea}");
     setState(() {
       currentState = first.administrativeArea;
       distName = first.subAdministrativeArea;
@@ -82,7 +82,7 @@ class _StatesState extends State<StateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("TypeAched " + _typeAheadController.text);
+    // print("TypeAched " + _typeAheadController.text);
     _typeAheadController.text = _typeAheadController.text == ''
         ? currentState
         : _typeAheadController.text;
