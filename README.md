@@ -1,4 +1,4 @@
-# covid19
+# covid-Hunt
 
 A new Flutter project.
 
