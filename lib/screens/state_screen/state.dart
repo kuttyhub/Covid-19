@@ -188,83 +188,8 @@ class _StatesState extends State<StateScreen> {
                           ],
                         ),
                       ),
-                    ),
-                  )
-                : SingleChildScrollView(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(
-                              top: 30, bottom: 10, left: 10, right: 10),
-                          child: Text(
-                            "Type the State name",
-                            style: TextStyle(
-                              color: kTitleColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                        TypeAheadFormField(
-                          textFieldConfiguration: TextFieldConfiguration(
-                            controller: this._typeAheadController,
-                            decoration: InputDecoration(
-                              hintText: 'Type here State name',
-                              hintStyle: TextStyle(fontSize: 16),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                ),
-                              ),
-                              filled: true,
-                              fillColor: Colors.grey[200],
-                              contentPadding: EdgeInsets.all(20),
-                              prefixIcon: Padding(
-                                padding: EdgeInsets.only(left: 24.0, right: 16.0),
-                                child: Icon(
-                                  Icons.search,
-                                  color: Colors.grey,
-                                  size: 28,
-                                ),
-                              ),
-                            ),
-                          ),
-                          suggestionsCallback: (pattern) {
-                            return _getSuggestions(snapshot.data, pattern);
-                          },
-                          itemBuilder: (context, suggestion) {
-                            return ListTile(
-                              title: Text(suggestion),
-                            );
-                          },
-                          transitionBuilder:
-                              (context, suggestionsBox, controller) {
-                            return suggestionsBox;
-                          },
-                          onSuggestionSelected: (suggestion) {
-                            setState(() {
-                              this._typeAheadController.text = suggestion;
-                            });
-                          },
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        StateStatistics(
-                          stateSummary: snapshot.data,
-                          stateName: _typeAheadController.text,
-                          currentStateName: currentState,
-                          currentDistName: distName,
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.09,
-                        ),
-                      ],
-                    ),
-                );
+                    ],
+                  );
         }
       },
     );
