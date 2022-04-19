@@ -1,16 +1,23 @@
 # covid-Hunt
 
-A new Flutter project.
+A Mobile Application to track the COVID-19 cases in India.
 
-## Getting Started
+### Used Public Api's:
 
-This project is a starting point for a Flutter application.
+> `https://api.covid19api.com/total/dayone/country/india` -> for India (Recovered data is deperecated)
+> `https://api.covid19india.org/state_district_wise.json` -> for statewise Data
 
-A few resources to get you started if this is your first Flutter project:
+### Getting Started:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- clone the Repo
+- Install the required packages
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  ```
+  flutter pub get
+  ```
+
+- Run the code
+
+  ```
+  flutter run
+  ```

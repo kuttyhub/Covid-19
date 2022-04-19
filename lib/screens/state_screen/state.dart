@@ -1,7 +1,9 @@
+import 'dart:developer';
+
+import 'package:covid_hunt/utils/getAddress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:geocoder/geocoder.dart';
 import 'package:location/location.dart';
 
 import '../../constants.dart';
@@ -34,7 +36,7 @@ class _StatesState extends State<StateScreen> {
     super.initState();
     states = covidService.getStateSummary();
     getUserLocation();
-    print(states);
+    // log(states.toString());
   }
 
   getUserLocation() async {
@@ -55,17 +57,17 @@ class _StatesState extends State<StateScreen> {
       }
       myLocation = null;
     }
-    final coordinates =
-        new Coordinates(myLocation.latitude, myLocation.longitude);
-    var addresses =
-        await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    var addresses = await getAddressFromCordinates(
+        latitude: myLocation.latitude, longitude: myLocation.longitude);
     var first = addresses.first;
-
-    print('->>${first.adminArea}');
-    currentState = first.adminArea;
-    print("-->$currentState");
-    this._typeAheadController.text = currentState;
-    distName = first.subAdminArea ?? 'none';
+    // log(first.toString());
+    // log('->>${first.administrativeArea}');
+    // log("-->${first.subAdministrativeArea}");
+    setState(() {
+      currentState = first.administrativeArea;
+      distName = first.subAdministrativeArea;
+      this._typeAheadController.text = currentState;
+    });
   }
 
   List<String> _getSuggestions(List<StateModel> list, String query) {
@@ -80,7 +82,7 @@ class _StatesState extends State<StateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("TypeAched " + _typeAheadController.text);
+    // print("TypeAched " + _typeAheadController.text);
     _typeAheadController.text = _typeAheadController.text == ''
         ? currentState
         : _typeAheadController.text;
@@ -104,6 +106,87 @@ class _StatesState extends State<StateScreen> {
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.black,
+                      ),
+                    ),
+                  )
+                : Stack(
+                    children: [
+                      Container(color: kPrimaryColor),
+                      SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: 30, bottom: 10, left: 10, right: 10),
+                              child: Text(
+                                "Type the State name",
+                                style: TextStyle(
+                                  color: kTitleColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                            TypeAheadFormField(
+                              textFieldConfiguration: TextFieldConfiguration(
+                                controller: this._typeAheadController,
+                                decoration: InputDecoration(
+                                  hintText: 'Type here State name',
+                                  hintStyle: TextStyle(fontSize: 16),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide: BorderSide(
+                                      width: 0,
+                                      style: BorderStyle.none,
+                                    ),
+                                  ),
+                                  filled: true,
+                                  fillColor: Colors.grey[200],
+                                  contentPadding: EdgeInsets.all(20),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 24.0, right: 16.0),
+                                    child: Icon(
+                                      Icons.search,
+                                      color: Colors.grey,
+                                      size: 28,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              suggestionsCallback: (pattern) {
+                                return _getSuggestions(snapshot.data, pattern);
+                              },
+                              itemBuilder: (context, suggestion) {
+                                return ListTile(
+                                  title: Text(suggestion),
+                                );
+                              },
+                              transitionBuilder:
+                                  (context, suggestionsBox, controller) {
+                                return suggestionsBox;
+                              },
+                              onSuggestionSelected: (suggestion) {
+                                setState(() {
+                                  this._typeAheadController.text = suggestion;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            StateStatistics(
+                              stateSummary: snapshot.data,
+                              stateName: _typeAheadController.text,
+                              currentStateName: currentState,
+                              currentDistName: distName,
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.06,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   )
